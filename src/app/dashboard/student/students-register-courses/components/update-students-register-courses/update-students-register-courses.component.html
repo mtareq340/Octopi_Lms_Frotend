@@ -1,0 +1,19 @@
+<form [formGroup]="studentsRegisterCourseForm" (submit)="update(studentsRegisterCourseForm.value)">
+  <div class="modal-body">
+    <div class="form-group">
+      <label  class="col-form-label">الطالب:</label>
+      <input id="nameStudent" type="text" placeholder="الطالب" title="الطالب" class="form-control" disabled>
+    </div>
+    <div class="form-group">
+      <label  class="col-form-label">المقرر الدراسي: <span *ngIf="loadCoursesEdit" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></label>
+      <select [ngClass]="{'is-invalid': studentsRegisterCourseForm.controls['regulation_course_id'].invalid && studentsRegisterCourseForm.controls['regulation_course_id'].touched}" formControlName="regulation_course_id" title="المقرر الدراسي" class="form-control mySelect2_regulation_course_id_edit" >
+        <option disabled selected value="">المقرر الدراسي</option>
+        <option *ngFor="let course of courses" value="{'regulation_course_id':{{course.id}},'course_id':{{course.course.id}}}">{{course.course.name}}</option>
+      </select>
+    </div>
+</div>
+  <div class="modal-footer">
+    <button id="closeUpdate" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+    <button id="submitUpdate" type="submit" class="btn btn-success">تعديل</button>
+  </div>
+  </form>

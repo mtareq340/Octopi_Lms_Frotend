@@ -1,0 +1,62 @@
+<app-search-results permission="show_studentResults" *ngIf="results.length != 0 && messageEmpty"></app-search-results>
+<div class="card-body" *ngIf="(results.length != 0 || dataReceive.is_show_gpa.length != 0 ) && messageEmpty" [ngStyle]="{ 'margin-top': results.length != 0 && messageEmpty ? '0px' : '1rem' }">
+  <div class="table-responsive table_main TableScroll">
+    <div class="table_main_two">
+      <table class="responsive-table">
+        <thead *ngIf="results.length != 0 && messageEmpty">
+          <tr>
+            <th>#</th>
+            <th scope="col">المقرر الدراسي</th>
+            <th scope="col" *ngIf="dataReceive.is_show_course.includes('mid_degree')">الميدترم</th>
+            <th scope="col" *ngIf="dataReceive.is_show_course.includes('work_year_degree')">أعمال السنة</th>
+            <th scope="col" *ngIf="dataReceive.is_show_course.includes('amly_degree')">العملي</th>
+            <th scope="col" *ngIf="dataReceive.is_show_course.includes('final_degree')">الفاينل</th>
+            <th scope="col" *ngIf="dataReceive.is_show_course.includes('total_degree')">المجموع</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="results.length != 0 && messageEmpty">
+          <tr *ngFor="let results of results|resultFilter:searchKey;let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td data-title="المقرر الدراسي">{{results.course.name}}</td>
+            <td data-title="الميدترم" *ngIf="dataReceive.is_show_course.includes('mid_degree')">{{results.mid_degree || results.mid_degree == 0 ?results.mid_degree:'-'}}</td>
+            <td data-title="أعمال السنة" *ngIf="dataReceive.is_show_course.includes('work_year_degree')">{{results.work_year_degree || results.work_year_degree == 0 ?results.work_year_degree:'-'}}</td>
+            <td data-title="العملي" *ngIf="dataReceive.is_show_course.includes('amly_degree')">{{results.amly_degree || results.amly_degree == 0 ?results.amly_degree:'-'}}</td>
+            <td data-title="الفاينل" *ngIf="dataReceive.is_show_course.includes('final_degree')">{{results.final_degree || results.final_degree == 0 ?results.final_degree:'-'}}</td>
+            <td data-title="المجموع" *ngIf="dataReceive.is_show_course.includes('total_degree')">{{results.total_degree || results.total_degree == 0 ?results.total_degree:'-'}}</td>
+           
+          </tr>
+        </tbody>
+            <tfoot *ngIf="messageEmpty && dataReceive.is_show_gpa.length != 0">
+              <tr *ngIf="dataReceive.is_show_gpa.includes('semester_gpa')">
+                <th scope="row" colspan="2">المعدل الفصلي</th>
+                <td data-title="المعدل الفصلي" [attr.colspan]="dataReceive.is_show_course.length">{{dataReceive.gpa.semester_gpa || dataReceive.gpa.semester_gpa == 0 ?dataReceive.gpa.semester_gpa:'-'}}</td>
+              </tr>
+              <tr *ngIf="dataReceive.is_show_gpa.includes('semester_gpa_word')">
+                <th scope="row" colspan="2">تقدير المعدل الفصلي</th>
+                <td data-title="تقدير المعدل الفصلي" [attr.colspan]="dataReceive.is_show_course.length">{{dataReceive.gpa.semester_gpa_word || dataReceive.gpa.semester_gpa_word == 0 ?dataReceive.gpa.semester_gpa_word:'-'}}</td>
+              </tr>
+              <tr *ngIf="dataReceive.is_show_gpa.includes('global_gpa')">
+                <th scope="row" colspan="2">المعدل التراكمي</th>
+                <td data-title="المعدل التراكمي" [attr.colspan]="dataReceive.is_show_course.length">{{dataReceive.gpa.global_gpa || dataReceive.gpa.global_gpa == 0 ?dataReceive.gpa.global_gpa:'-'}}</td>
+              </tr>
+              <tr *ngIf="dataReceive.is_show_gpa.includes('global_gpa_word')">
+                <th scope="row" colspan="2">تقدير المعدل التراكمي</th>
+                <td data-title="تقدير المعدل التراكمي" [attr.colspan]="dataReceive.is_show_course.length">{{dataReceive.gpa.global_gpa_word || dataReceive.gpa.global_gpa_word == 0 ?dataReceive.gpa.global_gpa_word:'-'}}</td>
+              </tr>
+            </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center" *ngIf="paramsLoadData">
+  <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+</div>
+<div class="showDataDiv" *ngIf="results.length == 0 && messageEmpty && dataReceive.is_show_gpa.length == 0">
+  <h5>لم يتم إعتماد النتيجة من قبل</h5>
+</div>
+<div class="text-center showDataDiv" *ngIf="!messageEmpty">
+  <button (click)="search()" id="submit" title="عرض البيانات" type="submit"
+    class="btn btn-primary showDataButton loadDataSearch"><ng-container *ngIf="!paramsLoadData"> <i class="fas fa-eye"></i>
+    </ng-container> <span *ngIf="paramsLoadData" class="spinner-border spinner-border-sm mt-1" role="status"
+      aria-hidden="true"></span> عرض النتيجة </button>
+</div>

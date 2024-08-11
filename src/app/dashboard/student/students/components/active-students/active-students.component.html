@@ -1,0 +1,78 @@
+<section class="p-3">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">تفعيلات مباشرة</button>
+      <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">تفعيلات بإكسيل</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <form [formGroup]="studentFormActive" (submit)="active(studentFormActive.value)">
+        <div class="modal-body">
+          <div class="form-group" style="position: relative;">
+            <label  class="col-form-label">الطالب :</label>
+            <input (focus)="handleFocusActive($event.target)" (blur)="handleBlurActive()" placeholder="الطالب" (keyup)="getStudentActive($event.target)"  title="الطالب" class="form-control" [value]="nameActive" [ngClass]="{'is-invalid': activeValue && !studentFormActive.controls['student_id'].value}">
+        <div class="data_select shadow" *ngIf="optionsActive" (mousedown)="setOptionsClickedActive(true)" (mouseup)="setOptionsClickedActive(false)">
+          <div style="color: gray;padding: 5px;cursor: default;">إختر الطالب <span *ngIf="loadActive" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></div>
+          <div class="data_select_option" *ngFor="let student of studentsActive" (click)="setDataStudentActive(student.id, student.name)">{{student.name}}</div>
+        </div>
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">المستوي :</label>
+            <select formControlName="level_id" title="المستوي" class="form-control" >
+              <option disabled selected value="">المستوي</option>
+              <option value="">الكل</option>
+              <option *ngFor="let level of levels" [value]="level.id">{{level.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">الشعبة :</label>
+            <select formControlName="division_id" title="الشعبة" class="form-control" >
+              <option disabled selected value="">الشعبة</option>
+              <option value="">الكل</option>
+              <option *ngFor="let division of divisions" [value]="division.id">{{division.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">التفعيل :</label>
+            <select [ngClass]="{'is-invalid': studentFormActive.controls['active'].invalid && studentFormActive.controls['active'].touched}" formControlName="active" title="التفعيل" class="form-control" >
+              <option disabled selected value="">النوع</option>
+              <option value="1">تفعيل</option>
+              <option value="0">إلغاء التفعيل</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="closeActive" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+          <button id="submitActive" type="submit"  class="btn btn-success">تأكيد</button>
+        </div>
+      </form>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <form [formGroup]="studentFormActiveExcel" (submit)="submitExcelActive(studentFormActiveExcel.value)" enctype="multipart/form-data">
+        <div class="modal-body mt-3">
+          <div class="input_file">
+            <a class="btn btn-primary btn_example mb-2" href="../../../../../../assets/excel/Students_Active.xlsx"
+              download="Students_Active.xlsx"><i class="fas fa-file-excel"></i> مثال للإكسيل</a>
+            <label for="fileActive" class="file_active_label">
+              <i class="fa fa-upload" aria-hidden="true"></i> إختر الملف
+            </label>
+            <input id="fileActive" type="file" name="fileActive" (change)="onFileActiveSelect($event)" accept=".xls,.xlsx,.csv" />
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">التفعيل :</label>
+            <select [ngClass]="{'is-invalid': studentFormActiveExcel.controls['active'].invalid && studentFormActiveExcel.controls['active'].touched}" formControlName="active" title="التفعيل" class="form-control" >
+              <option disabled selected value="">النوع</option>
+              <option value="1">تفعيل</option>
+              <option value="0">إلغاء التفعيل</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="closeUploadActive" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+          <button id="submitUploadActive" type="submit"  class="btn btn-success">تأكيد</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

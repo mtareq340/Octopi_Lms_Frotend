@@ -1,0 +1,37 @@
+<app-search-courses permission="show_studentCourses"></app-search-courses>
+<div class="card-body">
+  <div class="table-responsive table_main TableScroll">
+    <div class="table_main_two">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">المقرر الدراسي</th>
+            <th scope="col">كود المقرر</th>
+            <th scope="col">عدد الساعات</th>
+            <th scope="col">المحاضرات</th>
+            <th scope="col">المهمات</th>
+            <th scope="col">الإمتحانات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let courses of courses|courseFilter:searchKey;let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td data-title="المقرر الدراسي">{{courses.course.name}}</td>
+            <td data-title="كود المقرر">{{courses.course.code}}</td>
+            <td data-title="عدد الساعات">{{courses.course.credit_hour}}</td>
+            <td data-title="المحاضرات"><i (click)="getData('dashboard/Student/studentLectures',courses.course.id)" class="fas fa-eye image_btn btn_cursor"></i></td>
+            <td data-title="المهمات"><i (click)="getData('dashboard/Student/studentAssignments',courses.course.id)" class="fas fa-eye image_btn btn_cursor"></i></td>
+            <td data-title="الإمتحانات"><i (click)="getData('dashboard/Student/studentExams',courses.course.id)" class="fas fa-eye image_btn btn_cursor"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center" *ngIf="paramsLoadData">
+  <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+</div>
+<div class="text-center" *ngIf="courses.length == 0 && !paramsLoadData">
+  <h5>لا توجد مقررات دراسية</h5>
+</div>

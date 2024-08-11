@@ -1,0 +1,120 @@
+  <section class="container-fluid formSearch mt-2">
+    <div class="row">
+      <div class="col-sm-3 col-6">
+        <div class="form-group">
+          <button id="searchModal" title="بحث" type="button" class="btn btn-primary buttonSearch" data-toggle="modal" data-target="#exampleModalSearch"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <div class="col-sm-3 col-6" permission="export_studentsResults">
+        <div class="form-group">
+          <button (click)="getStudentsResultsNumbers()" title="أعداد نتائج الطلاب" type="button" class="btn btn-primary buttonSearch" data-toggle="modal" data-target="#exampleModalExport"><i class="fas fa-hourglass-half"></i></button>
+        </div>
+      </div>
+      <div class="col-sm-2 col-4" permission="print_studentsResults">
+        <div class="form-group">
+          <button onclick="window.print()" title="طباعه" type="button" class="btn btn-primary buttonSearch"><i class="fas fa-print"></i></button>
+        </div>
+      </div>
+      <div class="col-sm-2 col-4" permission="add_studentsResults">
+        <div class="form-group">
+          <button title="رفع بإكسيل" type="button" class="btn btn-primary buttonSearch" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file-excel"></i></button>
+        </div>
+      </div>
+      <div class="col-sm-2 col-4">
+        <div class="form-group">
+          <button routerLink=".." title="رجوع للخلف" type="button" class="btn btn-primary buttonSearch"><i class="fas fa-backward"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+<div permission="show_studentsResults" class="modal fade" id="exampleModalSearch" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">بحث</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="studentsResultsForm" (submit)="search(studentsResultsForm.value)">
+      <div class="modal-body">
+        <div class="form-group" style="position: relative;">
+          <label  class="col-form-label">بحث بالطالب :</label>
+          <input (focus)="handleFocusSearch($event.target)" (blur)="handleBlurSearch()" placeholder="بحث بالطالب" (keyup)="getStudentSearch($event.target)"  title="بحث بالطالب" class="form-control" [value]="nameSearch" [ngClass]="{'is-invalid': searchValue && !studentsResultsForm.controls['student_id'].value}">
+      <div class="data_select shadow" *ngIf="optionsSearch" (mousedown)="setOptionsClickedSearch(true)" (mouseup)="setOptionsClickedSearch(false)">
+        <div style="color: gray;padding: 5px;cursor: default;">إختر الطالب <span *ngIf="loadSearch" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></div>
+        <div class="data_select_option" *ngFor="let student of studentsSearch" (click)="setDataStudentSearch(student.id, student.name)">{{student.name}}</div>
+      </div>
+        </div>
+        <div class="form-group">
+          <label  class="col-form-label">بحث بالمقرر الدراسي :</label>
+          <select formControlName="course_id" title="بحث بالمقرر الدراسي" class="form-control mySelect2_course_id">
+            <option disabled>بحث بالمقرر الدراسي</option>
+            <option value="0">الكل</option>
+            <option *ngFor="let course of coursesSearch" [value]="course.id">{{course.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label  class="col-form-label">بحث بالمستوي :</label>
+          <select formControlName="level_id" title="بحث بالمستوي" class="form-control" >
+            <option disabled selected value="">بحث بالمستوي</option>
+            <option value="">الكل</option>
+            <option *ngFor="let level of levels" [value]="level.id">{{level.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label  class="col-form-label">بحث بالشعبة :</label>
+          <select formControlName="division_id" title="بحث بالشعبة" class="form-control" >
+            <option disabled selected value="">بحث بالشعبة</option>
+            <option value="">الكل</option>
+            <option *ngFor="let division of divisions" [value]="division.id">{{division.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="closeSearch" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+        <button id="submit" type="submit"  class="btn btn-success">بحث</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<div permission="add_studentsResults" class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">إضافة النتائج بالإكسيل</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-upload-students-results permission="add_studentsResults"></app-upload-students-results>
+</div>
+</div>
+</div>
+<div permission="export_studentsResults" class="modal fade" id="exampleModalExport" tabindex="-1" aria-labelledby="exampleModalLabelExport" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelExport">أعداد نتائج الطلاب</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <app-export-students-results [loadNumberReport]="loadNumberReport" [divisionName]="divisionName" [courseName]="courseName" [levelName]="levelName" [nameSearch]="nameSearch" [numbers]="numbers" permission="export_studentsResults"></app-export-students-results>
+    </div>
+  </div>
+  </div>
+<div permission="add_studentsResults" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel"></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+</div>

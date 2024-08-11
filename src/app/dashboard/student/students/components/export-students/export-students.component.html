@@ -1,0 +1,14 @@
+<form id="myFormId" [formGroup]="studentFormExcel" (submit)="submitExcel()" enctype="multipart/form-data">
+  <div class="modal-body">
+    <div class="numberReport my-2 p-2">
+      <div class="data_content"><h6>الطالب:</h6><h6 class="mr-1"><ng-container *ngIf="!loadNumberReport">{{nameSearch?nameSearch:'الكل'}}</ng-container> <span *ngIf="loadNumberReport" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></h6></div>
+      <div class="data_content"><h6>المستوي:</h6><h6 class="mr-1"><ng-container *ngIf="!loadNumberReport">{{levelName?levelName:'الكل'}}</ng-container> <span *ngIf="loadNumberReport" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></h6></div>
+      <div class="data_content"><h6>الشعبة:</h6><h6 class="mr-1"><ng-container *ngIf="!loadNumberReport">{{divisionName?divisionName:'الكل'}}</ng-container> <span *ngIf="loadNumberReport" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></h6></div>
+      <div class="text-danger data_content"><h6>إجمالي العدد:</h6><h6 class="mr-1"><ng-container *ngIf="!loadNumberReport">{{numbers}}</ng-container> <span *ngIf="loadNumberReport" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></h6></div>
+    </div>
+      <button id="submitExport" type="submit" class="btn btn-primary btn_example mb-2"><i class="fas fa-file-excel"></i> تنزيل الأكسيل </button>
+  </div>
+  <div class="modal-footer">
+    <button id="closeExport" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+  </div>
+</form>

@@ -1,0 +1,15 @@
+<div class="container-fluid px-5 pageHome">
+  <div class="row">
+  <ng-container *ngFor="let page of pages">
+    <div *ngIf="page.permission" class="col-lg-3 p-1">
+      <a [title]="page.name" class="info-box shadow-lg" [routerLink]="page.routerLink">
+        <span class="info-box-icon"><i [class]="page.icon"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">{{page.name}}</span>
+          <span class="info-box-number"><i [class]="page.icon"></i></span>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+  </div>
+</div>

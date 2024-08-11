@@ -1,0 +1,49 @@
+.formSearch{
+button{
+  box-shadow: none !important;
+  width: 100%;
+  height: 35px;
+}
+.form-group{
+  margin-bottom: 0.5rem;
+}
+.buttonSearch{
+  background-color: #002141 !important;
+  border-color: #002141 !important;
+  &:hover{
+    background-color: #002e5b !important;
+  }
+}
+}
+.modal-header .close{
+  padding: 0px;
+  margin: 0px;
+}
+@media print {
+  .formSearch {
+      display: none !important;
+  }
+}
+form{
+  text-align: right;
+  .form-group{
+    margin-bottom: 0.1rem;
+  }
+  input{
+    box-shadow: none !important;
+    height: 35px;
+  }
+  button{
+    box-shadow: none !important;
+  }
+  select{
+    padding: unset;
+    padding-right: 0.75rem;
+    cursor: pointer;
+    box-shadow: none !important;
+    height: 35px;
+  }
+.modal-body{
+  max-height: 62.08vh;
+}
+}

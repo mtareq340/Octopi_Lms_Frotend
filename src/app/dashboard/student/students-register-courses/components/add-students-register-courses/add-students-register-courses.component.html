@@ -1,0 +1,43 @@
+<form [formGroup]="studentsRegisterCourseForm" (submit)="insert(studentsRegisterCourseForm.value)">
+  <div class="modal-body">
+      <div class="form-group" style="position: relative;">
+        <label  class="col-form-label">الطالب:</label>
+        <input (focus)="handleFocus()" (blur)="handleBlur()" placeholder="الطالب" (keyup)="getStudent()" [ngClass]="{'is-invalid': studentsRegisterCourseForm.controls['student_id'].invalid && studentsRegisterCourseForm.controls['name'].touched}" formControlName="name" title="الطالب" class="form-control">
+        <div class="data_select shadow-lg" *ngIf="options" (mousedown)="setOptionsClicked(true)" (mouseup)="setOptionsClicked(false)">
+          <div style="color: gray;padding: 5px;cursor: default;">إختر الطالب <span *ngIf="load" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></div>
+          <div class="data_select_option" *ngFor="let student of students" (click)="setDataStudent(student.id, student.name)">{{student.name}}</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label  class="col-form-label">المقرر الدراسي: <span *ngIf="loadCourses" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></label>
+        <select [ngClass]="{'is-invalid': studentsRegisterCourseForm.controls['regulation_course_Ids'].invalid && studentsRegisterCourseForm.controls['regulation_course_Ids'].touched}" name="regulation_course_Ids[]" title="المقرر الدراسي" class="form-control mySelect2_regulation_course_Ids_add mySelect2" multiple>
+          <option disabled>المقرر الدراسي</option>
+          <option *ngFor="let course of courses" value="{'regulation_course_id':{{course.id}},'course_id':{{course.id}}}">{{course.name}}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="oldRegister">
+        <label  class="col-form-label">المقررات الدراسية المسجلة مسبقا:</label>
+        <div class="text-center" *ngIf="coursesRegister.length == 0">
+          <h6>لا توجد تسجيلات مسبقا لهذا الطالب</h6>
+        </div>
+        <p id="files-area">
+          <span id="filesList">
+            <span id="files-names">
+              <span class="file-block" *ngFor="let courseRegister of coursesRegister;let index = index">
+              <span class="file-delete" (click)="deleteCourseRegister(courseRegister,index)">
+                <span id="submitDeleteRegister{{index}}">+</span>
+              </span>
+              <span class="name">
+                {{courseRegister.course.name}}
+              </span>
+            </span>
+            </span>
+          </span>
+        </p>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button id="closeAdd" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+    <button id="submitAdd" type="submit" class="btn btn-success">إضافة</button>
+  </div>
+  </form>

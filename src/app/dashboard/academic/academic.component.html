@@ -1,0 +1,21 @@
+<app-header-module-dashboard [title]="title"></app-header-module-dashboard>
+<div class="container main-card">
+  <div class="row">
+    <ng-container *ngFor="let academic of academics">
+    <div *ngIf="academic.permission" class="col-lg-3 mt-2 academicCard">
+      <div [title]="academic.name" class="card shadow-lg" style="width: 100%;" [routerLink]="academic.routerLink">
+        <div>
+          <div class="text-center">
+            <div class="d-inline-block">
+              <a class="academicNumber p-4"><i [class]="academic.icon"></i></a>
+            </div>
+          </div>
+          <div class="card-body mt-2">
+            <h4 class="card-title">{{academic.name}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<form [formGroup]="studentsResultsForm" (submit)="update(studentsResultsForm.value)">
+  <div class="modal-body">
+    <div class="form-group">
+      <label  class="col-form-label">الطالب:</label>
+      <input id="nameStudent" type="text" placeholder="الطالب" title="الطالب" class="form-control" disabled>
+    </div>
+    <div class="form-group">
+      <label  class="col-form-label">الميدترم:</label>
+      <input [ngClass]="{'is-invalid': studentsResultsForm.controls['mid_degree'].invalid && studentsResultsForm.controls['mid_degree'].touched}" formControlName="mid_degree" type="number" class="form-control" title="الميدترم" placeholder="الميدترم">
+    </div>
+    <!-- <div class="form-group">
+      <label  class="col-form-label">العملي:</label>
+      <input [ngClass]="{'is-invalid': studentsResultsForm. controls['amly_degree'].invalid && studentsResultsForm.controls['amly_degree'].touched}" formControlName="amly_degree" type="number" class="form-control" title="العملي" placeholder="العملي">
+    </div> -->
+    <div class="form-group">
+      <label  class="col-form-label">أعمال السنة:</label>
+      <input [ngClass]="{'is-invalid': studentsResultsForm. controls['work_year_degree'].invalid && studentsResultsForm.controls['work_year_degree'].touched}" formControlName="work_year_degree" type="number" class="form-control" title="أعمال السنة" placeholder="أعمال السنة">
+    </div>
+    <div class="form-group">
+      <label  class="col-form-label">الفاينل:</label>
+      <input [ngClass]="{'is-invalid': studentsResultsForm.controls['final_degree'].invalid && studentsResultsForm.controls['final_degree'].touched}" formControlName="final_degree" type="number" class="form-control" title="الفاينل" placeholder="الفاينل">
+    </div>
+    <div class="form-group">
+      <label  class="col-form-label">المجموع:</label>
+      <input [ngClass]="{'is-invalid': studentsResultsForm.controls['total_degree'].invalid && studentsResultsForm.controls['total_degree'].touched}" formControlName="total_degree" type="number" class="form-control" title="المجموع" placeholder="المجموع">
+    </div>
+</div>
+  <div class="modal-footer">
+    <button id="closeUpdate" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+    <button id="submitUpdate" type="submit" class="btn btn-success">تعديل</button>
+  </div>
+  </form>

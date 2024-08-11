@@ -1,0 +1,63 @@
+<app-search-students-results permission="show_studentsResults"></app-search-students-results>
+<div class="card-body">
+  <div (scroll)="getDataPagination($event)" class="table-responsive table_main TableScroll">
+    <div class="table_main_two">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">الأسم</th>
+            <th scope="col">المقرر</th>
+            <th scope="col">الميدترم</th>
+            <th scope="col">العملي</th>
+            <th scope="col">أعمال السنة</th>
+            <th scope="col">الفاينل</th>
+            <th scope="col">المجموع</th>
+            <th scope="col" class="removePrint" permission="update_studentsResults">تعديل</th>
+            <th *ngIf="false" scope="col" class="removePrint" permission="delete_studentsResults">مسح</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let studentsResults of studentsResults;let i = index">
+            <th scope="row"><ng-container *ngIf="waitDataLoadPagination">{{i+1}}</ng-container> <span *ngIf="getDataLoadPagination" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></th>
+            <td data-title="الأسم">{{studentsResults.student.name}}</td>
+            <td data-title="المقرر">{{studentsResults.course.name}}</td>
+            <td data-title="الميدترم">{{studentsResults.mid_degree || studentsResults.mid_degree == 0 ?studentsResults.mid_degree:'-'}}</td>
+            <td data-title="العملي">{{studentsResults.amly_degree || studentsResults.amly_degree == 0 ?studentsResults.amly_degree:'-'}}</td>
+            <td data-title="أعمال السنة">{{studentsResults.work_year_degree || studentsResults.work_year_degree == 0 ?studentsResults.work_year_degree:'-'}}</td>
+            <td data-title="الفاينل">{{studentsResults.final_degree || studentsResults.final_degree == 0 ?studentsResults.final_degree:'-'}}</td>
+            <td data-title="المجموع">{{studentsResults.total_degree || studentsResults.total_degree == 0 ?studentsResults.total_degree:'-'}}</td>
+            <td class="removePrint" data-title="تعديل" permission="update_studentsResults"><a title='تعديل'
+                (click)="edit(studentsResults)" class="btn_cursor" data-toggle="modal" data-target="#exampleModalEdit"><i
+                  class="fas fa-edit edit_btn"></i></a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center" *ngIf="paramsLoadData">
+  <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+</div>
+<div class="text-center" *ngIf="studentsResults.length == 0 && messageEmpty">
+  <h5>لا يوجد بيانات</h5>
+</div>
+<div class="text-center showDataDiv" *ngIf="!messageEmpty && studentsResults.length == 0">
+  <button (click)="search({})" title="عرض البيانات" class="btn btn-primary showDataButton loadDataSearch"><ng-container *ngIf="!paramsLoadData"> <i class="fas fa-eye"></i> </ng-container> <span *ngIf="paramsLoadData" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span> عرض البيانات </button>
+</div>
+<div permission="update_studentsResults" class="modal fade" id="exampleModalEdit"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">تعديل تسجيل مقرر </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <app-update-students-results permission="update_studentsResults" [studentsResultsForm]="studentsResultsFormSend"
+        [courses]="coursesSend"></app-update-students-results>
+    </div>
+  </div>
+</div>

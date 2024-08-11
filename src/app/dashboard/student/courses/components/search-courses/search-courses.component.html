@@ -1,0 +1,18 @@
+<section class="formSearch">
+  <form class="mt-2" [formGroup]="courseForm">
+    <section class="container-fluid">
+      <div class="row">
+        <div class="col-lg-10">
+          <div class="form-group">
+            <input (keyup)="search(input.value)" #input title="البحث" type="text" class="form-control" placeholder="البحث">
+          </div>
+        </div>
+        <div class="col-lg-2" permission="print_studentCourses">
+          <div class="form-group">
+            <button onclick="window.print()" title="طباعه" type="button" class="btn btn-primary buttonSearch"><i class="fas fa-print"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+</section>

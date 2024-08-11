@@ -1,0 +1,61 @@
+<app-search-divisions permission="show_divisions"></app-search-divisions>
+<div class="card-body">
+  <div (scroll)="getDataPagination($event)" class="table-responsive table_main TableScroll">
+    <div class="table_main_two">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">الأسم</th>
+            <th scope="col" class="removePrint" permission="update_divisions">تعديل</th>
+            <th scope="col" class="removePrint" permission="delete_divisions">مسح</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let division of divisions;let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td data-title="الأسم">{{division.name}}</td>
+            <td class="removePrint" data-title="تعديل" permission="update_divisions"><a title='تعديل'
+                (click)="edit(division)" class="btn_cursor" data-toggle="modal" data-target="#exampleModalEdit"><i
+                  class="fas fa-edit edit_btn"></i></a></td>
+            <td class="removePrint" data-title="مسح" permission="delete_divisions"><a (click)="deleteId(division.id)"
+                title='مسح' data-toggle="modal" data-target="#exampleModalDelete" class="btn_cursor"><i
+                  class="fas fa-trash-alt delete_btn"></i></a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center" *ngIf="paramsLoadData">
+  <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+</div>
+<div class="text-center" *ngIf="divisions.length == 0 && messageEmpty">
+  <h5>لا توجد شعب</h5>
+</div>
+<div class="text-center showDataDiv" *ngIf="!messageEmpty && divisions.length == 0">
+  <button (click)="search({})" title="عرض البيانات" class="btn btn-primary showDataButton loadDataSearch"><ng-container *ngIf="!paramsLoadData"> <i class="fas fa-eye"></i> </ng-container> <span *ngIf="paramsLoadData" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span> عرض البيانات </button>
+</div>
+<div permission="update_divisions" class="modal fade" id="exampleModalEdit" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">تعديل شعبة</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <app-update-divisions permission="update_divisions" [divisionForm]="divisionFormSend"></app-update-divisions>
+    </div>
+  </div>
+</div>
+<div permission="delete_divisions" class="modal fade" id="exampleModalDelete" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+    <app-delete-divisions permission="delete_divisions" [divisionId]="divisionIdSend"></app-delete-divisions>
+  </div>
+  </div>
+</div>

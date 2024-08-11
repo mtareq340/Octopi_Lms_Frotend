@@ -1,0 +1,13 @@
+<form [formGroup]="divisionForm" (submit)="update(divisionForm.value)">
+  <div class="modal-body">
+
+      <div class="form-group">
+        <label  class="col-form-label">الأسم:</label>
+        <input [ngClass]="{'is-invalid': divisionForm.controls['name'].invalid && divisionForm.controls['name'].touched}" formControlName="name" type="text" class="form-control" title="الأسم" placeholder="الأسم">
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button id="closeUpdate" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+    <button id="submitUpdate" type="submit" class="btn btn-success">تعديل</button>
+  </div>
+  </form>

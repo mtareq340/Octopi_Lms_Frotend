@@ -1,0 +1,61 @@
+  <section class="container-fluid formSearch mt-2">
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <button id="searchModal" title="بحث" type="button" class="btn btn-primary buttonSearch" data-toggle="modal" data-target="#exampleModalSearch"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <div class="col-3" permission="add_divisions">
+        <div class="form-group">
+          <button (click)='showForm(true,false,"إضافة شعبة")' title="إضافة" type="button" class="btn btn-primary buttonSearch" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="col-3" permission="print_divisions">
+        <div class="form-group">
+          <button onclick="window.print()" title="طباعه" type="button" class="btn btn-primary buttonSearch"><i class="fas fa-print"></i></button>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <button routerLink=".." title="رجوع للخلف" type="button" class="btn btn-primary buttonSearch"><i class="fas fa-backward"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+<div permission="add_divisions" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">{{titleForm}}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <app-add-divisions permission="add_divisions" *ngIf="showFormAdd"></app-add-divisions>
+  </div>
+</div>
+</div>
+<div permission="show_divisions" class="modal fade" id="exampleModalSearch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">بحث</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="divisionForm" (submit)="search(divisionForm.value)">
+        <div class="modal-body">
+          <div class="form-group">
+          <label  class="col-form-label">بحث بالأسم :</label>
+          <input formControlName="search_key" title="بحث بالأسم" type="text" class="form-control" placeholder="بحث بالأسم">
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button id="closeSearch" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+          <button id="submit" type="submit"  class="btn btn-success">بحث</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>

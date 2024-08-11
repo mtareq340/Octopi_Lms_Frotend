@@ -1,0 +1,33 @@
+<section class="LoginPage">
+<div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form [formGroup]="login" (submit)="Login(login.value)" class="sign-in-form">
+          <h2 class="title">تسجيل الدخول</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input formControlName="username" type="text" autocomplete="off" placeholder="أسم المستخدم" required>
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input formControlName="password" type="password" autocomplete="off" placeholder="كلمة السر" id="id_password" required>
+            <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+          </div>
+
+          <div class="d-flex">
+            <button id="submit" type="submit" class="btn">تسجيل الدخول</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+            <img loading="lazy" draggable="false" src="../../../../assets/images/logo_login.webp" width="100%" height="100%" alt="logo_login"/>
+        </div>
+      </div>
+    </div>
+</div>
+</section>

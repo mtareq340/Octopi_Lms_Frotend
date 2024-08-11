@@ -1,0 +1,21 @@
+form{
+  text-align: right;
+  input{
+    box-shadow: none !important;
+    height: 35px;
+  }
+  button{
+    box-shadow: none !important;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+.modal-body{
+  max-height: 62.08vh;
+}
+}

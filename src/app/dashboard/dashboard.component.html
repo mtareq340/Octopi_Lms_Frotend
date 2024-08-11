@@ -1,0 +1,91 @@
+<!-- the code is -->
+
+
+<section id='cli' style="direction: rtl !important;">
+    <nav class="side-navbar ">
+        <div class="side-navbar-wrapper  ">
+            <div class="sidenav-header d-flex align-items-right justify-content-right infoHeader shadow-lg">
+                <div class="sidenav-header-inner text-center top_sidebar">
+                    <!-- <a  routerLink="/dashboard"><img loading="lazy" class="user_image img-fluid rounded-circle" draggable="false" src="" alt="Logo"></a> -->
+                    <h2 class="cursor_default_mouse user_name">
+                        <span class="full_name">{{name|slice:0:15}}</span>
+                        <br><span class=" cursor_default_mouse full_type"><i class="fas fa-circle"></i> {{role_name}} </span>
+                    </h2>
+                </div>
+                <div class="sidenav-header-logo ">
+                <a class="brand-small text-center logo_name "> Octopi </a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <h5 class="sidenav-heading cursor_default_mouse"> لوحة التحكم </h5>
+                <ul id="side-main-menu" class="side-menu list-unstyled ">
+                    <li>
+                        <a class="page_link" (click)="mobileToggle()" routerLink="/dashboard" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"> <i class="fas fa-home"></i> الرئيسية </a>
+                    </li>
+                  <li permission="student_affairs">
+                    <a class="page_link" (click)="mobileToggle()" [routerLinkActive]="['active']" routerLink="Student"> <i class="fas fa-user-graduate"></i> الطلاب  </a>
+                  </li>
+
+                  <li permission="show_studentCourses">
+                    <a routerLink="Student/studentCourses" class="page_link" (click)="mobileToggle()" [routerLinkActive]="['active']"> <i class="fas fa-book"></i> المقررات الدراسية </a>
+                  </li>
+                  <li permission="show_studentResults">
+                    <a routerLink="Student/studentResults" class="page_link" (click)="mobileToggle()" [routerLinkActive]="['active']"> <i class="fas fa-graduation-cap"></i> النتيجة </a>
+                  </li>
+                  <li permission="Academic">
+                    <a class="page_link" (click)="mobileToggle()" [routerLinkActive]="['active']" routerLink="Academic"> <i class="fas fa-book"></i> الإرشاد الأكاديمي  </a>
+                  </li>
+                <li permission="Result">
+                  <a class="page_link" (click)="mobileToggle()" [routerLinkActive]="['active']" routerLink="Result"> <i class="fas fa-graduation-cap"></i> النتائج  </a>
+                </li>
+                    <li permission="ProfileSetting">
+                      <a class="page_link" (click)="mobileToggle()" [routerLinkActive]="['active']" routerLink="ProfileSetting"> <i class="fas fa-cogs"></i> الإعدادات  </a>
+                    </li>
+                 
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- active -->
+    <div class="page">
+        <!-- navbar-->
+        <header class="header pt-0 header_navbar_top">
+            <nav class="navbar navbar_head">
+                <div class="container-fluid navbar_handle_space">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <div class="navbar-header navbar_header_top_main">
+                            <a id="toggle-btn" class="menu-btn shadow-lg toggle_button"><i class="fas fa-bars"></i></a>
+                        </div>
+                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                            <!-- Log out-->
+                            <li class="nav-item dropdown ">
+                                <div class="dropdown">
+                                    <a class="nav-link logout log_out" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="d-none d-sm-inline-block">الإشعارات</span><i class="fas fa-bell"></i><span class="message">0</span></a>
+                                    <div class="dropdown-menu notification_style" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item notification_item">لا يوجد إشعارات</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a (click)="logout()" class="nav-link logout log_out"> <span class="d-none d-sm-inline-block">تسجيل الخروج</span><i class="fas fa-sign-out-alt"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section class="body_content">
+            <router-outlet></router-outlet>
+        </section>
+        <footer class="main-footer">
+            <div class="container-fluid footer_float">
+                <div class="row">
+                    <div class="col-sm-12 footer_center">
+                        <p>Octopi 2024</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</section>

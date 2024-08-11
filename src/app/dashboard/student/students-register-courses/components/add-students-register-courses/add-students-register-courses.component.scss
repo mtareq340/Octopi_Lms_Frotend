@@ -1,0 +1,41 @@
+form{
+  text-align: right;
+  input{
+    box-shadow: none !important;
+    height: 35px;
+  }
+  button{
+    box-shadow: none !important;
+  }
+  select{
+    padding: unset;
+    padding-right: 0.75rem;
+    cursor: pointer;
+    box-shadow: none !important;
+    height: 35px;
+  }
+.modal-body{
+  max-height: 62.08vh;
+}
+.form-group{
+  margin-bottom: 0.1rem;
+}
+}
+.data_select{
+  text-align: right;
+  background-color: white;
+  max-height: 20vh;
+  overflow: auto;
+  border: 1px solid black;
+  z-index: 222;
+  width: 100%;
+  position: absolute;
+  .data_select_option{
+    padding: 5px;
+    cursor: pointer;
+    &:hover{
+      background-color: #002141;
+      color: white;
+    }
+  }
+}

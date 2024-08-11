@@ -1,0 +1,65 @@
+<app-search-courses permission="show_courses"></app-search-courses>
+<div class="card-body">
+  <div (scroll)="getDataPagination($event)" class="table-responsive table_main TableScroll">
+    <div class="table_main_two">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">الأسم</th>
+            <th scope="col">عدد الساعات</th>
+            <th scope="col">الكود</th>
+            <th scope="col" class="removePrint" permission="update_courses">تعديل</th>
+            <th scope="col" class="removePrint" permission="delete_courses">مسح</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of courses;let i = index">
+            <th scope="row"><ng-container *ngIf="waitDataLoadPagination">{{i+1}}</ng-container> <span *ngIf="getDataLoadPagination" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></th>
+            <td data-title="الأسم">{{course.name}}</td>
+            <td data-title="عدد الساعات">{{course.credit_hour}}</td>
+            <td data-title="الكود">{{course.code?course.code:'-'}}</td>
+            <td class="removePrint" data-title="تعديل" permission="update_courses"><a title='تعديل'
+                (click)="edit(course)" class="btn_cursor" data-toggle="modal" data-target="#exampleModalEdit"><i
+                  class="fas fa-edit edit_btn"></i></a></td>
+            <td class="removePrint" data-title="مسح" permission="delete_courses"><a (click)="deleteId(course.id)"
+                title='مسح' data-toggle="modal" data-target="#exampleModalDelete" class="btn_cursor"><i
+                  class="fas fa-trash-alt delete_btn"></i></a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center" *ngIf="paramsLoadData">
+  <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+</div>
+<div class="text-center" *ngIf="courses.length == 0 && messageEmpty">
+  <h5>لا يوجد بيانات</h5>
+</div>
+<div class="text-center showDataDiv" *ngIf="!messageEmpty && courses.length == 0">
+  <button (click)="search({})" title="عرض البيانات" class="btn btn-primary showDataButton loadDataSearch"><ng-container *ngIf="!paramsLoadData"> <i class="fas fa-eye"></i> </ng-container> <span *ngIf="paramsLoadData" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span> عرض البيانات </button>
+</div>
+<div permission="update_courses" class="modal fade" id="exampleModalEdit" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">تعديل مقرر دراسي</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <app-update-courses permission="update_courses" [courseForm]="courseFormSend"></app-update-courses>
+    </div>
+  </div>
+</div>
+<div permission="delete_courses" class="modal fade" id="exampleModalDelete" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+    <app-delete-courses permission="delete_courses" [courseId]="courseIdSend"></app-delete-courses>
+  </div>
+  </div>
+</div>

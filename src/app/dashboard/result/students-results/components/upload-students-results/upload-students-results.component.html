@@ -1,0 +1,16 @@
+<form id="myFormId" [formGroup]="studentFormExcel" (submit)="submitExcel()" enctype="multipart/form-data">
+  <div class="modal-body">
+    <div class="input_file">
+      <a class="btn btn-primary btn_example mb-2" href="../../../../../../assets/excel/Student_Result.xlsx"
+        download="Student_Result.xlsx"><i class="fas fa-file-excel"></i> مثال للإكسيل</a>
+      <label for="file" class="file_label">
+        <i class="fa fa-upload" aria-hidden="true"></i> إختر الملف
+      </label>
+      <input id="file" type="file" name="file" (change)="onFileSelect($event)" accept=".xls,.xlsx,.csv" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="closeUpload" type="button" class="btn btn-danger" data-dismiss="modal">إلغاء</button>
+    <button id="submitUpload" type="submit"  class="btn btn-success">إضافة</button>
+  </div>
+</form>

@@ -1,0 +1,21 @@
+<app-header-module-dashboard [title]="title"></app-header-module-dashboard>
+<div class="container main-card">
+  <div class="row">
+    <ng-container *ngFor="let setting of MainModules">
+    <div *ngIf="setting.permission" class="col-lg-3 mt-2 settingCard">
+      <div [title]="setting.name" class="card shadow-lg" style="width: 100%;" [routerLink]="setting.routerLink">
+        <div>
+          <div class="text-center">
+            <div class="d-inline-block">
+              <a class="settingNumber p-4"><i [class]="setting.icon"></i></a>
+            </div>
+          </div>
+          <div class="card-body mt-2">
+            <h4 class="card-title">{{setting.name}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  </div>
+</div>

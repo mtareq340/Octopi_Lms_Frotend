@@ -1,0 +1,29 @@
+<section class="p-3">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">تغيير كلمة السر</button>
+    </div>
+  </nav>
+  <div class="tab-content p-5" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <form [formGroup]="passwordForm" (submit)="updatePassword(passwordForm.value)">
+            <div class="form-group">
+              <label  class="col-form-label">كلمة المرور الحالية:</label>
+              <input [ngClass]="{'is-invalid': passwordForm.controls['current_password'].invalid && passwordForm.controls['current_password'].touched}" formControlName="current_password" type="password" class="form-control" title="كلمة المرور الحالية" placeholder="كلمة المرور الحالية">
+            </div>
+            <div class="form-group">
+              <label  class="col-form-label">كلمة المرور الجديدة:</label>
+              <input [ngClass]="{'is-invalid': passwordForm.controls['new_password'].invalid && passwordForm.controls['new_password'].touched}" formControlName="new_password" type="password" class="form-control" title="كلمة المرور الجديدة" placeholder="كلمة المرور الجديدة">
+            </div>
+            <div class="form-group">
+              <label  class="col-form-label">تأكيد كلمة المرور الجديدة:</label>
+              <input [ngClass]="{'is-invalid': passwordForm.controls['confirm_new_password'].invalid && passwordForm.controls['confirm_new_password'].touched}" formControlName="confirm_new_password" type="password" class="form-control" title="تأكيد كلمة المرور الجديدة" placeholder="تأكيد كلمة المرور الجديدة">
+            </div>
+          <div class="form-group mt-3">
+            <button id="submitupdatePassword" type="submit" class="btn btn-success">تعديل</button>
+          </div>
+        </form>
+    </div>
+  </div>
+
+</section>

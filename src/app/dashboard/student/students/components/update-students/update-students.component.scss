@@ -1,0 +1,39 @@
+form{
+  text-align: right;
+  input{
+    box-shadow: none !important;
+    height: 35px;
+  }
+  button{
+    box-shadow: none !important;
+  }
+  select{
+    padding: unset;
+    padding-right: 0.75rem;
+    cursor: pointer;
+    box-shadow: none !important;
+    height: 35px;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+}
+.FormCLass{
+  max-height: 70vh;
+  overflow: auto;
+}
+h3 {
+  color: #002141;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 4px;
+    background: #6c98e1;
+    margin: 14px 0px 14px 0px;
+  }
+}

@@ -1,0 +1,20 @@
+h3 {
+  color: #002141;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: #6c98e1;
+    margin: 14px 0px 14px 0px;
+  }
+}
+button{
+  box-shadow: none !important;
+  background-color: #002141 !important;
+  border-color: #002141 !important;
+  &:hover{
+    background-color: #002e5b !important;
+  }
+}

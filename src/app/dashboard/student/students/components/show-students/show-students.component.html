@@ -1,0 +1,62 @@
+<app-search-students permission="show_students"></app-search-students>
+<div class="card-body">
+  <div (scroll)="getDataPagination($event)" class="table-responsive table_main TableScroll">
+    <div class="table_main_two">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col">الأسم</th>
+            <th scope="col">الكود</th>
+            <th scope="col">الرقم القومي</th>
+            <th scope="col">المستوي</th>
+            <th scope="col">الشعبة</th>
+            <th scope="col">الأيميل</th>
+            <th scope="col">الهاتف</th>
+            <th scope="col">التفعيل</th>
+            <th scope="col" class="removePrint" permission="update_students">تعديل</th>
+            <th *ngIf="false" scope="col" class="removePrint" permission="delete_students">مسح</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students;let i = index">
+            <th scope="row"><ng-container *ngIf="waitDataLoadPagination">{{i+1}}</ng-container> <span *ngIf="getDataLoadPagination" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span></th>
+            <td data-title="الأسم">{{student.name}}</td>
+            <td data-title="الكود">{{student.code}}</td>
+            <td data-title="الرقم القومي">{{student.national_id}}</td>
+            <td data-title="المستوي">{{student.level.name}}</td>
+            <td data-title="الشعبة">{{student.division.name}}</td>
+            <td data-title="الأيميل">{{student.email?student.email:'-'}}</td>
+            <td data-title="الهاتف">{{student.phone?student.phone:'-'}}</td>
+            <td data-title="التفعيل"><input (click)="changeStatus(student.id)" title='تفعيل' class="check_active shadow-lg" type="checkbox"
+              [checked]="student.user.active == 1" /></td>
+            <td class="removePrint" data-title="تعديل" permission="update_students"><a title='تعديل'
+                (click)="edit(student)" class="btn_cursor"><i
+                  class="fas fa-edit edit_btn"></i></a></td>
+            <td *ngIf="false" class="removePrint" data-title="مسح" permission="delete_students"><a (click)="deleteId(student.id)" title='مسح'
+                    data-toggle="modal" data-target="#exampleModalDelete" class="btn_cursor"><i
+                      class="fas fa-trash-alt delete_btn"></i></a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="text-center" *ngIf="paramsLoadData">
+  <span class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span>
+</div>
+<div class="text-center" *ngIf="students.length == 0 && messageEmpty">
+  <h5>لا يوجد طلاب</h5>
+</div>
+<div class="text-center showDataDiv" *ngIf="!messageEmpty && students.length == 0">
+  <button (click)="search({})" title="عرض البيانات" class="btn btn-primary showDataButton loadDataSearch"><ng-container *ngIf="!paramsLoadData"> <i class="fas fa-eye"></i> </ng-container> <span *ngIf="paramsLoadData" class="spinner-border spinner-border-sm mt-1" role="status" aria-hidden="true"></span> عرض البيانات </button>
+</div>
+<div permission="delete_students" class="modal fade" id="exampleModalDelete" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <app-delete-student permission="delete_students" [studentId]="studentIdSend"></app-delete-student>
+    </div>
+  </div>
+</div>

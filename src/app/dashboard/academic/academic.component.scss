@@ -1,0 +1,41 @@
+.main-card{
+  text-align: center;
+  .academicCard {
+    .card{
+      height: 100%;
+      cursor: pointer;
+      border: 1px dashed #002141;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: unset;
+      padding: 1.5rem;
+    }
+    .card-body{
+      padding: 0px;
+    }
+    .academicNumber {
+      background-color: #002141;
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i{
+        font-size: 30px;
+      }
+    }
+    h4{
+      color: #002141;
+      font-weight: bolder;
+      margin-bottom: 0px;
+    }
+
+  }
+
+}
